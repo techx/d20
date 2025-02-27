@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HexagonSvg from "./HexagonSvg";
+import TriangleSvg from "./TriangleSvg";
+import DiamondSvg from "./DiamondSvg";
+import PentagonSvg from "./PentagonSvg";
 
 export default function Dice({ type, faceValue }) {
   return (
@@ -10,6 +13,9 @@ export default function Dice({ type, faceValue }) {
       </View>
       { type === "d20" ? <HexagonSvg width="100%" height="100%" />
       : type === "d6"  ? <View style={styles.d6} />
+      : type === "d4"  ? <TriangleSvg width="100%" height="100%" />
+      : type === "d10"  ? <DiamondSvg width="100%" height="100%" />
+      : type === "d12"  ? <PentagonSvg width="100%" height="100%" />
       : false}
     </View>
   );
@@ -19,7 +25,6 @@ const styles = StyleSheet.create({
   dice: {
     width: 100,
     height: 100,
-    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -41,6 +46,7 @@ const styles = StyleSheet.create({
   d6: {
     backgroundColor: "#000",
     width: "90%",
-    height: "90%"
+    height: "90%",
+    borderRadius: 10,
   }
 });

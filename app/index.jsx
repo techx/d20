@@ -2,7 +2,8 @@ import AddDiceButton from "@/components/AddDiceButton";
 import DiceSum from "@/components/DiceSum";
 import { View, ScrollView, StyleSheet, FlatList } from "react-native";
 import Dice from "@/components/Dice";
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const [dice, setDice] = useState([]);
@@ -13,32 +14,39 @@ export default function Index() {
     setKey(key + 1);
   };
 
+  const sum = useMemo(() => dice.reduce((previous, current) => previous + current.faceValue, 0), [dice]);
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <ScrollView
           style={styles.scrollContainer}
           alwaysBounceVertical={false}
           showsVerticalScrollIndicator={false}>
           <View style={styles.diceContainer}>
+            <AddDiceButton onAddDice={onAddDice} />
             <FlatList
               contentContainerStyle={styles.diceContainer}
               numColumns={3}
               scrollEnabled={false}
               data={dice}
-              renderItem={({item}) => <Dice type={item.type} faceValue={item.faceValue} />} />
-            <AddDiceButton onAddDice={onAddDice} />
+              renderItem={({ item }) => <Dice type={item.type} faceValue={item.faceValue} />} />
+            <Dice type="d6" faceValue={6} />
+            <Dice type="d20" faceValue={20} />
+            <Dice type="d10" faceValue={10} />
+            <Dice type="d4" faceValue={4} />
+            <Dice type="d12" faceValue={12} />
           </View>
         </ScrollView>
-        {false &&
+        {sum > 0 &&
           (
             <View style={styles.diceSumContainer}>
-              <DiceSum sum={0} />
+              <DiceSum sum={sum} />
             </View>
           )
         }
       </View>
-    </View >
+    </SafeAreaView>
   );
 }
 
@@ -54,8 +62,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 100,
-    marginBottom: 50,
     paddingHorizontal: 25,
     width: "100%"
   },
@@ -64,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    rowGap: 20
+    rowGap: 10
   },
   diceSumContainer: {
     marginTop: 35
