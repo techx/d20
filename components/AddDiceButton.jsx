@@ -1,15 +1,15 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import FontAwesomeIcons from '@expo/vector-icons/FontAwesome6'
 
-export default function AddDiceButton() {
+export default function AddDiceButton({ onAddDice }) {
   return (
     <View style={styles.buttonContainer}>
-      <View style={styles.button}>
+      <Pressable onPress={() => onAddDice()} style={styles.button}>
         <FontAwesomeIcons name="dice-d20" size={28} color="#cccccc" />
         <Text style={styles.text}>
           Add Dice
         </Text>
-      </View>
+      </Pressable>
     </View>
   )
 }

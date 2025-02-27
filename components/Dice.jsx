@@ -2,13 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import HexagonSvg from "./HexagonSvg";
 
-export default function Dice() {
+export default function Dice({ type, faceValue }) {
   return (
     <View style={styles.dice}>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>20</Text>
+        <Text style={styles.text}>{faceValue}</Text>
       </View>
-      <HexagonSvg width="100%" height="100%" />
+      { type === "d20" ? <HexagonSvg width="100%" height="100%" />
+      : type === "d6"  ? <View style={styles.d6} />
+      : false}
     </View>
   );
 };
@@ -36,4 +38,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
+  d6: {
+    backgroundColor: "#000",
+    width: "90%",
+    height: "90%"
+  }
 });
