@@ -1,7 +1,8 @@
 import { View, ScrollView, StyleSheet, FlatList } from "react-native";
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Accelerometer } from "expo-sensors";
+import { Audio } from "expo-av";
 
 import DicePicker from "@/components/DicePicker";
 import DiceList from "@/components/DiceList";
@@ -14,8 +15,14 @@ export default function Index() {
   const [key, setKey] = useState(0);
   const [rolling, setRolling] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
+  const rollSfx = useRef(null);
 
-  const rollDice = () => {
+  const rollDice = async () => {
+    if (rollSfx.current) {
+      await rollSfx.current.sound.setPositionAsync(0);
+      await rollSfx.current.sound.playAsync();
+    }
+
     setDice(dice => dice.map((die) => {
       let faceValue = Math.random();
 
@@ -38,6 +45,12 @@ export default function Index() {
     setTimeout(() => { setRolling(false); }, 1000);
   }
 
+  const loadAudio = async () => {
+    rollSfx.current = await Audio.Sound.createAsync(
+      require("@/assets/audio/dice_roll.wav")
+    );
+  }
+
   useEffect(() => {
     let lastRollTime = Date.now();
 
@@ -49,7 +62,13 @@ export default function Index() {
       }
     });
 
-    return () => accel.remove();
+    loadAudio();
+
+    return () => {
+      if (rollSfx.current)
+        rollSfx.current.sound.unloadAsync();
+      accel.remove();
+    }
   }, []);
 
   const onAddDice = () => {
