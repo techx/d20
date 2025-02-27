@@ -43,7 +43,7 @@ export default function Index() {
 
     const accel = Accelerometer.addListener(({ x, y, z }) => {
       const magnitude = Math.sqrt(x * x + y * y + z * z);
-      if (magnitude > 3.5 && Date.now() - lastRollTime >= 1000) {
+      if (magnitude > 3 && Date.now() - lastRollTime >= 1000) {
         lastRollTime = Date.now();
         rollDice();
       }
