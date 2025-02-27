@@ -1,26 +1,22 @@
 import AddDiceButton from "@/components/AddDiceButton";
 import DiceSum from "@/components/DiceSum";
 import { View, ScrollView, StyleSheet } from "react-native";
-import { useState } from "react"
+import Dice from "@/components/Dice";
 
 export default function Index() {
-  const [sum, setSum] = useState(2);
-
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView style={{ width: "100%", height: "100%" }} alwaysBounceVertical={false} showsVerticalScrollIndicator={false}>
           <View style={styles.diceContainer}>
             <AddDiceButton />
-            <AddDiceButton />
-            <AddDiceButton />
-            <AddDiceButton />
+            <Dice />
           </View>
         </ScrollView>
-        {!!sum &&
+        {true &&
           (
             <View style={styles.diceSumContainer}>
-              <DiceSum sum={sum} />
+              <DiceSum sum={0} />
             </View>
           )
         }
@@ -39,8 +35,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 100,
     marginBottom: 50,
-    marginLeft: 0,
-    marginRight: 0,
+    paddingHorizontal: 25,
+    width: "100%"
   },
   diceContainer: {
     flexDirection: 'column',
