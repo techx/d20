@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, Platform, Pressable } from 'react-native';
+import { StyleSheet, FlatList, Platform } from 'react-native';
 import Dice from "./Dice";
 
 export default function DiceList({ onSelect, onCloseModal }) {
@@ -17,13 +17,11 @@ export default function DiceList({ onSelect, onCloseModal }) {
       data={dice}
       contentContainerStyle={styles.listContainer}
       renderItem={({ item }) => (
-        <Pressable
-          onPress={() => {
-            onSelect(item);
-            onCloseModal();
-          }}>
-          <Dice key={item.key} type={item.type} faceValue={item.faceValue} />
-        </Pressable>
+        <Dice
+          onPress={() => { onSelect(item); onCloseModal(); }}
+          key={item.key}
+          type={item.type}
+          faceValue={item.faceValue} />
       )}
     />
   );
