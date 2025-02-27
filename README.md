@@ -3,11 +3,9 @@
 </h1>
 
 <div align="center">
-	<a href="#overview">Overview</a>
-  <span> • </span>
     	<a href="#installation">Installation</a>
   <span> • </span>
-    	<a href="#additional-ideas">Additional Ideas</a>
+    	<a href="#exercises">Additional Ideas</a>
   <span> • </span>
       <a href="#license">License</a>
 </div>
@@ -40,7 +38,7 @@ npm install
 npx expo start
 ```
 
-## Additional Exercises
+## Exercises
 
 - **Easy**: Don't play rolling sound effect when there are no dice on the screen.
 - **Easy**: Show the expected value of a roll given some set of dice.
