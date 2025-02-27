@@ -1,18 +1,31 @@
-import AddDiceButton from "@/components/AddDiceButton";
-import DiceSum from "@/components/DiceSum";
 import { View, ScrollView, StyleSheet, FlatList } from "react-native";
-import Dice from "@/components/Dice";
 import { useState, useMemo } from 'react';
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import DicePicker from "@/components/DicePicker";
+import DiceList from "@/components/DiceList";
+import AddDiceButton from "@/components/AddDiceButton";
+import DiceSum from "@/components/DiceSum";
+import Dice from "@/components/Dice";
 
 export default function Index() {
   const [dice, setDice] = useState([]);
   const [key, setKey] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const onAddDice = () => {
-    setDice([...dice, { type: "d20", faceValue: 20, key }])
-    setKey(key + 1);
+    setModalVisible(true);
   };
+
+  const onModalClose = () => {
+    setModalVisible(false);
+  }
+
+  const onPickedDie = (item) => {
+    setDice([...dice, { type: item.type, faceValue: item.faceValue, key }])
+    setKey(key + 1);
+    setModalVisible(false);
+  }
 
   const sum = useMemo(() => dice.reduce((previous, current) => previous + current.faceValue, 0), [dice]);
 
@@ -30,12 +43,7 @@ export default function Index() {
               numColumns={3}
               scrollEnabled={false}
               data={dice}
-              renderItem={({ item }) => <Dice type={item.type} faceValue={item.faceValue} />} />
-            <Dice type="d6" faceValue={6} />
-            <Dice type="d20" faceValue={20} />
-            <Dice type="d10" faceValue={10} />
-            <Dice type="d4" faceValue={4} />
-            <Dice type="d12" faceValue={12} />
+              renderItem={({ item }) => <Dice key={item.key} type={item.type} faceValue={item.faceValue} />} />
           </View>
         </ScrollView>
         {sum > 0 &&
@@ -46,6 +54,9 @@ export default function Index() {
           )
         }
       </View>
+      <DicePicker isVisible={isModalVisible} onClose={onModalClose}>
+        <DiceList onSelect={onPickedDie} onCloseModal={onModalClose} />
+      </DicePicker>
     </SafeAreaView>
   );
 }
