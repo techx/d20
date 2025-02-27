@@ -1,50 +1,53 @@
-# Welcome to your Expo app 👋
+<h1 align="center">
+    <img width="672" alt="image" src="https://github.com/user-attachments/assets/17afd08f-18ce-4902-9ba1-ce7e2e23c856">
+</h1>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<div align="center">
+	<a href="#overview">Overview</a>
+  <span> • </span>
+    	<a href="#installation">Installation</a>
+  <span> • </span>
+    	<a href="#additional-ideas">Additional Ideas</a>
+  <span> • </span>
+      <a href="#license">License</a>
+</div>
 
-## Get started
+<br />
 
-1. Install dependencies
+d20 is a React Native and Expo application made as a demo for the mobile development learnathon track at [Blueprint 2025](https://blueprint.hackmit.org).
 
-   ```bash
-   npm install
-   ```
+### File Structure
 
-2. Start the app
+* `assets/` - All icons and static images are stored in this folder
+* `components/` - Stores reusable React components which are not screens
+* `pages/` - Stores all of the screens for the application (in this case just one)
+* `app.json` - Stores metadata for mobile application
+* `package.json` - Tracks dependencies used in application
 
-   ```bash
-    npx expo start
-   ```
 
-In the output, you'll find options to open the app in a
+## Installation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Node.js
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+React Native and Expo uses [Node.js](https://nodejs.org/en/download/) as the underlying JavaScript runtime. Install Node.js version 23.8.0 from the official site.
 
-## Get a fresh project
+### Running
 
-When you're ready, run:
+To run the application, first install dependencies then start it:
 
-```bash
-npm run reset-project
+```
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Additional Exercises
 
-## Learn more
+- **Easy**: Don't play rolling sound effect when there are no dice on the screen.
+- **Easy**: Show the expected value of a roll given some set of dice.
+- **Easy**: Show the formula of dice in standard notation (e.g. 2d6+1d20).
+- **Easy**: Add another screen which allows you to customized settings (e.g. turn sound on/off).
+- **Hard**: Animated the dice rolling in 3D.
 
-To learn more about developing your project with Expo, look at the following resources:
+## License
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+d20 is licensed under [MIT](./LICENSE). You may use and distribute this source code as long as it follows the guidelines set by the license.
