@@ -40,11 +40,11 @@ npx expo start
 
 ## Exercises
 
-- **Easy**: Don't play rolling sound effect when there are no dice on the screen.
+- **Easy**: Don't play dice roll sound effect when there are no dice.
 - **Easy**: Show the expected value of a roll given some set of dice.
 - **Easy**: Show the formula of dice in standard notation (e.g. 2d6+1d20).
-- **Easy**: Add another screen which allows you to customized settings (e.g. turn sound on/off).
-- **Hard**: Animated the dice rolling in 3D.
+- **Easy**: Add another screen which allows you to customize settings (e.g. turn sound on/off, change color of dice, etc.).
+- **Hard**: Animate rolling dice using 3D animation.
 
 ## License
 
