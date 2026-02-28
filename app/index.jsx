@@ -18,9 +18,13 @@ export default function Index() {
   const rollSfx = useRef(null);
 
   const rollDice = async () => {
-    if (rollSfx.current) {
-      await rollSfx.current.sound.setPositionAsync(0);
-      await rollSfx.current.sound.playAsync();
+    try {
+      if (rollSfx.current) {
+        await rollSfx.current.sound.setPositionAsync(0);
+        await rollSfx.current.sound.playAsync();
+      }
+    } catch (e) {
+      console.warn("Roll sound play failed:", e);
     }
 
     setDice(dice => dice.map((die) => {
@@ -46,9 +50,19 @@ export default function Index() {
   }
 
   const loadAudio = async () => {
-    rollSfx.current = await Audio.Sound.createAsync(
-      require("@/assets/audio/dice_roll.wav")
-    );
+    try {
+      await Audio.setAudioModeAsync({
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: false,
+        shouldDuckAndroid: true,
+        playThroughEarpieceAndroid: false,
+      });
+      rollSfx.current = await Audio.Sound.createAsync(
+        require("@/assets/audio/dice_roll.wav")
+      );
+    } catch (e) {
+      console.warn("Audio load failed:", e);
+    }
   }
 
   useEffect(() => {
@@ -109,7 +123,8 @@ export default function Index() {
               data={dice}
               renderItem={({ item }) =>
                 <Dice
-                  onPress={() => removeDie(item.key)}
+                  onPress={rollDice}
+                  onLongPress={() => removeDie(item.key)}
                   key={item.key}
                   type={item.type}
                   rolling={rolling}

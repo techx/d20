@@ -6,7 +6,7 @@ import DiamondSvg from "./DiamondSvg";
 import PentagonSvg from "./PentagonSvg";
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 
-export default function Dice({ type, faceValue, onPress, rolling = false }) {
+export default function Dice({ type, faceValue, onPress, onLongPress, rolling = false }) {
   const shake = useSharedValue(0);
   const shuffleNumberTimeout = useRef(null);
   const [animatedNumber, setAnimatedNumber] = useState(1);
@@ -53,7 +53,7 @@ export default function Dice({ type, faceValue, onPress, rolling = false }) {
 
   return (
     <Animated.View style={[animatedStyle, styles.dice]}>
-      <Pressable onPress={onPress} style={styles.textContainer}>
+      <Pressable onPress={onPress} onLongPress={onLongPress} style={styles.textContainer}>
         <Text style={styles.text}>{rolling ? animatedNumber : !!faceValue ? (faceValue) : "?"}</Text>
       </Pressable>
       {type === "d20" ? <HexagonSvg width="100%" height="100%" />
